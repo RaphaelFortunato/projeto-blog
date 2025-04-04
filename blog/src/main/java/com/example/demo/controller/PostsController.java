@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.exceptions.RecursoNaoEncntradoException;
 import com.example.demo.model.Post;
 import com.example.demo.repository.PostsRepository;
 import com.example.demo.service.PostsService;
@@ -50,10 +51,9 @@ public class PostsController {
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Post> buscarPorId(@PathVariable Long id){
-		return postsService.buscarPorId(id)
-				.map(ResponseEntity::ok)
-				.orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<?> buscarPorId(@PathVariable Long id){
+		Post post = postsService.buscarPorId(id);
+		return ResponseEntity.ok(post);
 	}
 	
 	@PostMapping

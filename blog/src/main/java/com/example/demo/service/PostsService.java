@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.example.demo.BlogApplication;
+import com.example.demo.exceptions.RecursoNaoEncntradoException;
 import com.example.demo.model.Post;
 import com.example.demo.repository.PostsRepository;
 
@@ -30,8 +31,9 @@ public class PostsService {
 	}
 	
     //buscar por id
-	public Optional<Post> buscarPorId(Long id){
-		return postsRepository.findById(id);
+	public Post buscarPorId(Long id){
+		return postsRepository.findById(id)
+				.orElseThrow(() -> new RecursoNaoEncntradoException("Prduto com ID " + id + "não encontrado"));
 				
 	}
 	
@@ -42,6 +44,11 @@ public class PostsService {
 
 	//deletar
 	public void deletarPost(Long id) {
+		
+		if(!postsRepository.existsById(id)) {
+			throw new RecursoNaoEncntradoException("Prduto com ID " + id + " não encontrado.");
+		}
+		
 		postsRepository.findById(id);
 	}
 	
