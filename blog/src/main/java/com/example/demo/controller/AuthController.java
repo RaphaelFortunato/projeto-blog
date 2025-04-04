@@ -32,14 +32,14 @@ public class AuthController {
 	//private UsuarioService usuarioService;
 	
 	//registrar usuario
-	 @PostMapping("/register")
+	 @PostMapping(value = "/register")
 	    public ResponseEntity<?> register(@RequestBody Map<String, String> request) {
 	        Usuario usuario = usuarioService.registrarUsuario(request.get("username"), request.get("password"));
 	        return ResponseEntity.ok(usuario);
 	    }
 	
 	//fazer login
-	 @PostMapping("/login")
+	 @PostMapping(value = "/login")
 	    public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
 	       Optional<Usuario> usuario = usuarioService.buscarPorUsername(request.get("username"));
 	       if (usuario.isPresent() && usuario.get().getPassword().equals(request.get("password"))) {

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @EntityScan(basePackages = "com.example.demo.model")
 @SpringBootApplication
-//@ComponentScan(basePackages = {"com.*"})
-//@EnableJpaRepositories(basePackages = {"com.example.demo.repository"})
-//@EnableTransactionManagement
+@ComponentScan(basePackages = {"com.*"})
+@EnableJpaRepositories(basePackages = {"com.example.demo.repository"})
+@EnableTransactionManagement
 public class BlogApplication {
 
 	public static void main(String[] args) {

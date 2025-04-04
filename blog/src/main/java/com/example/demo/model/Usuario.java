@@ -24,15 +24,18 @@ public class Usuario {
 	private String password;
 
 	public Usuario() {
-		super();
+		
 	}
 
 	public Usuario(String username, String password) {
-		super();
 		this.username = username;
 		this.password = password;
 	}
 
+	public Long getId() {
+        return id;
+    }
+	
 	public String getUsername() {
 		return username;
 	}
